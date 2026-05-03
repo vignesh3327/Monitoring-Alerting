@@ -190,3 +190,30 @@ Node Exporter is an open-source tool that exposes a wide variety of hardware- an
 ## License
 
 MIT License (or specify your license here)
+
+
+```
+CPU (most used panels)
+🔥 Total CPU usage (% per instance)
+100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
+⚡ CPU usage per core
+100 - (rate(node_cpu_seconds_total{mode="idle"}[5m]) * 100)
+
+👉 Good for detailed graphs
+
+🏆 Top 5 high CPU servers
+topk(5, 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100))
+🧠 Memory
+🔥 Memory usage %
+(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100
+📊 Memory used (GB)
+(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / 1024^3
+💾 Disk
+🔥 Disk usage %
+(1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} 
+/ node_filesystem_size_bytes{fstype!~"tmpfs|overlay"})) * 100
+📦 Disk read rate
+rate(node_disk_read_bytes_total[5m])
+📦 Disk write rate
+rate(node_disk_written_bytes_total[5m])
+```
